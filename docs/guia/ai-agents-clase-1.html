@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Clase 1 — Agentes de IA con Open WebUI + Ollama + MCP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/black.css" id="theme">
+  <style>
+    :root{
+      --brand:#5eead4; /* teal */
+      --accent:#fde047; /* amber */
+    }
+    .reveal .slides section h1, 
+    .reveal .slides section h2, 
+    .reveal .slides section h3 { 
+      letter-spacing: .4px;
+    }
+    .badge{display:inline-block;padding:.25em .6em;border-radius:999px;background:var(--brand);color:#111;font-weight:700;font-size:.7em;margin-left:.4em;}
+    .note{font-size:.7em;opacity:.75}
+    .grid-2 {display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}
+    .grid-3 {display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;align-items:start}
+    .pill {border:1px solid #444;border-radius:999px;padding:.35em .8em;display:inline-flex;gap:.4em;align-items:center;margin:.2em .2em 0 0}
+    .pill b{color:var(--accent)}
+    .kicker{font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+    pre code{font-size: .75em; line-height:1.35}
+    .muted{opacity:.75}
+    .callout{border-left:4px solid var(--brand); padding:.6em .9em;background:rgba(94,234,212,.08);border-radius:.25rem}
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- Cover -->
+    <section data-background-gradient="radial-gradient(#0f172a, #000)">
+      <h1>Agentes de IA</h1>
+      <h3 class="muted">De los LLM a soluciones accionables</h3>
+      <p class="kicker">Clase 1 · Open WebUI + Ollama + MCP Tools <span class="badge">Workshop</span></p>
+      <p style="margin-top:1.2rem"><small>David Torelli · Málaga · 2025</small></p>
+    </section>
+
+    <!-- Agenda -->
+    <section>
+      <h2>Agenda</h2>
+      <ol>
+        <li>¿Qué es un agente?</li>
+        <li>LLM vs Asistentes vs Agentes</li>
+        <li>Herramientas: extendiendo capacidades</li>
+        <li>Frameworks para agentes</li>
+        <li>Stack: Open WebUI + Ollama + Tools</li>
+        <li>Open WebUI Tools vs MCP Tools</li>
+        <li>Cómo extender Open WebUI</li>
+      </ol>
+      <p class="note">Objetivo: terminar con una visión clara para construir nuestro primer agente en la próxima sesión.</p>
+    </section>
+
+    <!-- 1. Qué es un agente -->
+    <section>
+      <h2>1) ¿Qué es un agente?</h2>
+      <div class="grid-2">
+        <div>
+          <p>Un <b>agente</b> es un sistema que <b>percibe</b>, <b>razona</b> y <b>actúa</b> para lograr objetivos en un entorno.</p>
+          <ul>
+            <li><b>Reactivo:</b> responde a estímulos.</li>
+            <li><b>Deliberativo:</b> planifica y evalúa.</li>
+            <li><b>Colaborativo / Multiagente:</b> coordina con otros agentes.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="callout">
+            <p><b>Loop de un agente</b></p>
+            <pre><code>Percepción → Razonamiento → Acción → Evaluación → (repite)</code></pre>
+            <p class="muted">Ej.: revisar emails, extraer facturas, actualizar BBDD, notificar resultados.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. LLM vs Asistentes vs Agentes -->
+    <section>
+      <h2>2) LLM vs Asistentes vs Agentes</h2>
+      <table>
+        <thead>
+          <tr><th>Concepto</th><th>Qué hace</th><th>Ejemplos</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>LLM</b></td><td>Genera y transforma texto</td><td>Llama, Mistral, Gemma</td></tr>
+          <tr><td><b>Asistente</b></td><td>Gestión de contexto + herramientas limitadas</td><td>Chat assistants</td></tr>
+          <tr><td><b>Agente</b></td><td>Toma decisiones y ejecuta acciones hacia un objetivo</td><td>CrewAI, AutoGen</td></tr>
+        </tbody>
+      </table>
+      <p class="callout" style="margin-top:1rem">
+        <b>Salto clave:</b> del <i>prompt</i> al <b>plan</b>; del texto a la <b>acción</b>; del contexto estático a <b>memoria y herramientas</b>.
+      </p>
+    </section>
+
+    <!-- 3. Tools: extendiendo capacidades -->
+    <section>
+      <h2>3) Herramientas (Tools)</h2>
+      <p>Una <b>herramienta</b> es una interfaz (función, API o servicio) que el agente invoca para interactuar con datos o realizar acciones.</p>
+      <div>
+        <span class="pill"><b>Web</b> Search</span>
+        <span class="pill"><b>DB</b> SQL</span>
+        <span class="pill"><b>Mail</b> IMAP/Gmail</span>
+        <span class="pill"><b>OCR</b> PDF/Imagen</span>
+        <span class="pill"><b>Storage</b> S3/MinIO</span>
+        <span class="pill"><b>HTTP</b> APIs</span>
+      </div>
+      <pre><code>// Idea de arquitectura
+Usuario → Agente ↔ LLM Core ↔ Tools ↔ Mundo real</code></pre>
+    </section>
+
+    <!-- 4. Frameworks -->
+    <section>
+      <h2>4) Frameworks para agentes</h2>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><b>LangChain</b> (Py/JS): pipelines + tools</li>
+            <li><b>CrewAI</b> (Py): multiagente colaborativo</li>
+            <li><b>LlamaIndex</b> (Py): RAG + memoria</li>
+            <li><b>AutoGen</b> (Py): patrones conversacionales multiagente</li>
+            <li><b>MCP</b> (Py/Go): protocolo estándar de herramientas</li>
+          </ul>
+        </div>
+        <div>
+          <table>
+            <thead><tr><th>Framework</th><th>Foco</th><th>Nivel</th></tr></thead>
+            <tbody>
+              <tr><td>LangChain</td><td>Pipelines</td><td>Medio</td></tr>
+              <tr><td>CrewAI</td><td>Multiagente</td><td>Avanzado</td></tr>
+              <tr><td>LlamaIndex</td><td>RAG</td><td>Medio</td></tr>
+              <tr><td>MCP</td><td>Integración unificada de tools</td><td>Avanzado</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="note">Elegiremos el stack que mejor encaje con un taller local, reproducible y 100% privado.</p>
+    </section>
+
+    <!-- 5. Stack Open WebUI + Ollama + Tools -->
+    <section>
+      <h2>5) Nuestro stack: local, privado, reproducible</h2>
+      <pre><code>Usuario → Open WebUI (frontend)
+                 ↓
+             Ollama (LLM local)
+                 ↓
+        Tools (Open WebUI / MCP)
+                 ↓
+        Datos y Servicios (DB, S3, Email, HTTP)</code></pre>
+      <ul>
+        <li><b>Open WebUI</b>: interfaz moderna para chat/agents.</li>
+        <li><b>Ollama</b>: motor de modelos locales (Llama, Mistral, Gemma...).</li>
+        <li><b>Tools</b>: integraciones hacia “el mundo real”.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Open WebUI Tools vs MCP Tools -->
+    <section>
+      <h2>6) Open WebUI Tools vs MCP Tools</h2>
+      <table>
+        <thead>
+          <tr><th>Aspecto</th><th>Open WebUI Tool</th><th>MCP Tool</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Modelo</td><td>Función local (SDK WebUI)</td><td>Servicio externo estandarizado (MCP)</td></tr>
+          <tr><td>Ejecución</td><td>Dentro de WebUI</td><td>Vía servidor MCP (proxy)</td></tr>
+          <tr><td>Interoperabilidad</td><td>En el entorno WebUI</td><td>Entre agentes y plataformas</td></tr>
+          <tr><td>Seguridad</td><td>Local, menos aislamiento</td><td>Aislamiento por proceso/servidor</td></tr>
+          <tr><td>Reuso</td><td>Orientado a proyecto</td><td>Orientado a ecosistema</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:1rem">
+        <b>MCP</b> = Protocolo para conectar agentes con herramientas de forma <b>portable</b>, <b>segura</b> y <b>reutilizable</b>.
+      </div>
+    </section>
+
+    <!-- 7. Extender Open WebUI -->
+    <section>
+      <h2>7) Extender Open WebUI</h2>
+      <div class="grid-2">
+        <div>
+          <p>Pasos típicos:</p>
+          <ol>
+            <li>Definir la herramienta (<code>tools/</code>): Python/JS</li>
+            <li>Describir el contrato (inputs/outputs)</li>
+            <li>Registrar en la configuración (JSON)</li>
+            <li>Probar en WebUI con un flujo guiado</li>
+          </ol>
+        </div>
+        <div>
+          <p>Ejemplo (pseudo-Tool):</p>
+          <pre><code>{
+  "name": "ocr_image_tool",
+  "description": "Extrae texto de imágenes",
+  "schema": {"path": "string"},
+  "handler": "tools.ocr_image:run"
+}</code></pre>
+        </div>
+      </div>
+      <p class="note">Ideas de integración: Email, MinIO/S3, DB SQL, HTTP APIs, OCR (PDF/imagen), planificador.</p>
+    </section>
+
+    <!-- Slide with code: minimal MCP server idea -->
+    <section>
+      <h3>Ejemplo conceptual · MCP server (mínimo)</h3>
+      <pre><code class="language-python"># server.py (borrador mínimo conceptual)
+from fastmcp import MCPServer, tool
+
+app = MCPServer("demo-mcp")
+
+@tool()
+def email_count(inbox: str) -&gt; int:
+    "Devuelve el número de emails en un buzón"
+    # ... lógica/IMAP ...
+    return 42
+
+if __name__ == "__main__":
+    app.run()  # expone las tools vía MCP
+</code></pre>
+      <p class="note">Un cliente (p.ej. Open WebUI) podría descubrir y usar estas herramientas MCP.</p>
+    </section>
+
+    <!-- Roadmap / Qué haremos en el taller -->
+    <section>
+      <h2>Roadmap del taller</h2>
+      <ul>
+        <li>Instalar Open WebUI + Ollama (devcontainers)</li>
+        <li>Crear el primer agente con una Tool simple</li>
+        <li>Conectar un MCP server (correo / S3 / DB)</li>
+        <li>Memoria y planificación (prompting + patterns)</li>
+        <li>Hardening y buenas prácticas (logs, trazas, tests)</li>
+      </ul>
+    </section>
+
+    <!-- Cierre -->
+    <section>
+      <h2>¡Listos para construir!</h2>
+      <p>En la próxima sesión: entorno listo y primer agente funcional.</p>
+      <p class="muted">Objetivo: agente que usa una Tool real y ejecuta una acción medible.</p>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+<script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://unpkg.com/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    plugins: [ RevealNotes, RevealHighlight ],
+    width: 1280,
+    height: 720
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+services:
+  # disable for mac users and install native with GPU
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ollama_models:/root/.ollama
+    networks:
+      - ai-solver
+    ports:
+      - "11434:11434"
+
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    depends_on: [ollama]
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      # - OLLAMA_BASE_URL=http://host.docker.internal:11434 # For Mac users with GPU usage
+    volumes:
+      - openwebui_data:/app/backend/data
+    networks:
+      - ai-solver
+    ports:
+      - "3000:8080"
+    restart: unless-stopped
+
+  ai-solver:
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../:/workspaces/ai-solver
+    networks:
+      ai-solver:
+        aliases:
+          - devcontainer
+          - debug-ai-solver
+
+volumes:
+  ollama_models:
+  openwebui_data:
+
+networks:
+  ai-solver:
+    name: ai-solver
+    driver: bridge
