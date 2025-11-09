@@ -1,0 +1,4 @@
+crewai[tools]
+pytest
+httpx
+mcpo

@@ -1,0 +1,24 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Container reference extractor",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "/workspaces/ai-solver/src/01_container_ref_extractor/main.py",
+      "args": ["--images", "/workspaces/ai-solver/data/images/containers"],
+      "envFile": "/workspaces/ai-solver/src/01_container_ref_extractor/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python Debugger: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    }
+  ]
+}

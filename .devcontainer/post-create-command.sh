@@ -1,0 +1,1 @@
+pip install -r /workspaces/ai-solver/requirements.txt
