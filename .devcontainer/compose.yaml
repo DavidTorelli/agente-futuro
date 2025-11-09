@@ -1,28 +1,26 @@
 
 services:
   # disable for mac users and install native with GPU
-  # ollama:
-  #   image: ollama/ollama:latest
-  #   container_name: ollama
-  #   restart: unless-stopped
-  #   runtime: nvidia
-  #   environment:
-  #     - NVIDIA_VISIBLE_DEVICES=all
-  #   volumes:
-  #     - ollama_models:/root/.ollama
-  #   networks:
-  #     - ai-solver
-  #   ports:
-  #     - "11434:11434"
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ollama_models:/root/.ollama
+    networks:
+      - ai-solver
+    ports:
+      - "11434:11434"
 
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: openwebui
     # Disable for Mac users with GPU usage
-    # depends_on: [ollama]
+    depends_on: [ollama]
     environment:
-      # - OLLAMA_BASE_URL=http://ollama:11434
-      - OLLAMA_BASE_URL=http://host.docker.internal:11434 # For Mac users with GPU usage
+      - OLLAMA_BASE_URL=http://ollama:11434
+      # - OLLAMA_BASE_URL=http://host.docker.internal:11434 # For Mac users with GPU usage
     volumes:
       - openwebui_data:/app/backend/data
     networks:
@@ -33,7 +31,6 @@ services:
 
   mcpo-weather:
     image: ghcr.io/open-webui/mcpo:main
-    container_name: mcpo-weather
     command:
       - --port
       - "8001"
@@ -49,7 +46,7 @@ services:
     networks:
       - ai-solver
     ports:
-      - "8001:8001"
+      - "8009:8001"
     restart: unless-stopped
 
   ai-solver:
