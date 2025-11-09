@@ -1,5 +1,4 @@
 crewai[tools]
 pytest
 httpx
-
-# TODO: Remove this key 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
+mcpo

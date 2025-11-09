@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "open_meteo_weather": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "open-meteo-mcp-server",
+        "--stdio"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

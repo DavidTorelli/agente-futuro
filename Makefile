@@ -15,5 +15,12 @@ down:
 test:
 	pytest -q
 
-slides:
-	reveal-md docs/guia/slides.md --watch
+intro-slides:
+	reveal-md docs/slides/intro.md --watch
+
+config-slides:
+	reveal-md docs/slides/config.md --watch
+
+tools-slides:
+	reveal-md docs/slides/tools.md --watch
+
