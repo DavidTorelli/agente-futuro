@@ -7,7 +7,7 @@ revealOptions:
   margin: 0.04
   minScale: 0.4
   maxScale: 1.6
-  transition: slideng
+  transition: slide
   slideNumber: 'c/t'
 ---
 
