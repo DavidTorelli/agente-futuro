@@ -290,8 +290,9 @@ Librerias para crear herramientas:
 --
 
 **Ejemplos habituales:**  
-- 🧩 Buscadores web.  
-- 📄 explorador de documentos.  
+- 🌐 Buscadores web.  
+- 📄 explorador de documentos.
+- 📊 Consulta de datos
 - ☁️ Conectores S3/MinIO.
 
 ---
@@ -446,9 +447,11 @@ Note:
 
 Pasos típicos:
 1. Definir la herramienta (`tools/`)
-2. Describir el contrato (inputs/outputs)
+2. Describir el contrato (Valves / User Valves)
 3. Registrar en `tools.json`
 4. Probar en WebUI
+
+https://docs.openwebui.com/features/plugin/tools/development/
 
 Ejemplo:
 
@@ -489,11 +492,11 @@ Note:
 
 ## Roadmap del taller
 
-- Instalar Open WebUI + Ollama (devcontainers)
-- Crear el primer agente con una Tool
-- Conectar un MCP server (correo / S3 / DB)
-- Memoria y planificación (prompting + patterns)
-- Logs, trazas, tests y buenas prácticas
+- 🦙 Instalar Open WebUI + Ollama (devcontainers)
+- ⚙️ Crear el primer agente con una Tool
+- 📧 Conectar un MCP server (correo / S3 / DB)
+- 🧠 Memoria y planificación (prompting + patterns)
+- 🧪 Logs, trazas, tests y buenas prácticas
 
 Note:
 - Reforzar que veremos ejemplos reales conectados a datos locales.

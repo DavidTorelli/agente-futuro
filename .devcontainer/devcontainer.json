@@ -25,30 +25,8 @@
   "postCreateCommand": "/workspaces/ai-solver/.devcontainer/post-create-command.sh",
   "remoteUser": "vscode",
   "mounts": [
-    // Source code
-    {
-      "source": "${localWorkspaceFolder}",
-      "target": "/workspace/ai-solver",
-      "type": "bind"
-    },
-    // Git configurations
-    {
-      "source": "${localEnv:HOME}/.gitconfig",
-      "target": "/root/.gitconfig",
-      "type": "bind"
-    },
-    // Netrc for private repository access
-    {
-      "source": "${localEnv:HOME}/.netrc",
-      "target": "/home/vscode/.netrc",
-      "type": "bind"
-    },
-    // SSH keys for GitHub access
-    {
-      "source": "${localEnv:HOME}/.ssh",
-      "target": "/home/vscode/.ssh",
-      "type": "bind"
-    }
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
   ],
     "shutdownAction": "stopContainer"
   }
+/
