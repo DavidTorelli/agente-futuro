@@ -41,7 +41,7 @@ Note:
 1. ¿Qué es un agente?  
 2. LLM vs Asistentes vs Agentes  
 3. Operativa de un agente:  
-   Percepción, razonamiento, acción, evaluación  
+   Percepción, razonamiento, interacción, evaluación, ejecución
 4. Frameworks para agentes  
 5. Stack: Open WebUI + Ollama + Tools  
 6. Open WebUI Tools vs MCP Tools  
@@ -111,17 +111,19 @@ Vamos... que las profesoras y los profesores tienen los días contados 😂
 flowchart LR
     P[Percepción]
     R[Razonamiento]
-    A[Acción]
+    A[Interacción]
     E[Evaluación]
+    X[Ejecución]
 
     P --> R --> A --> E
     E -.->|Iterar| P
+    E --> X
 ```
 
 ---
 
 ### Percepción
-**Objetivo:** transformar señales crudas del entorno en datos estructurados listos para razonar.  
+⚙️ **Objetivo:** transformar señales crudas del entorno en datos estructurados listos para razonar.  
 - Define qué observa el agente (texto, audio, métricas, APIs).  
 - Traduce cada observación a un formato común.  
 - Garantiza contexto actualizado y fiable.
@@ -158,7 +160,7 @@ flowchart LR
 ---
 
 ### Razonamiento
-**Objetivo**: Dotar de memoria y conocimiento a los agentes para mejorar el contexto que define el problema a resolver.
+🧠 **Objetivo**: Dotar de memoria y conocimiento a los agentes para mejorar el contexto que define el problema a resolver.
 
 --
 
@@ -166,8 +168,8 @@ flowchart LR
 
 --
 
-#### 🔍 Retrieval-Augmented Generation (RAG)
-**Objetivo:** combinar un modelo LLM con un motor de búsqueda o base de conocimiento **externa y actualizada**.
+####  Retrieval-Augmented Generation (RAG)
+🔍 **Objetivo:** combinar un modelo LLM con un motor de búsqueda o base de conocimiento **externa y actualizada**.
 
 --
 
@@ -191,7 +193,7 @@ Un agente que consulta políticas internas de una empresa antes de responder al 
 --
 
 #### Knowledge-Augmented Generation (KAG)
-**Idea:** el agente integra **estructuras de conocimiento preprocesadas** (ontologías, grafos, embeddings, relaciones semánticas).
+🕸️**Objetivo:** integrar **estructuras de conocimiento preprocesadas** (ontologías, grafos, embeddings, relaciones semánticas).
 
 --
 
@@ -220,8 +222,8 @@ Note:
 
 #### RAG + KAG en agentes
 
-**RAG** aporta *actualidad y contexto*.  
-**KAG** aporta *razonamiento y estructura*.  
+🔍 **RAG** aporta *actualidad y contexto*.  
+🧠 **KAG** aporta *razonamiento y estructura*.  
 
 Juntos permiten construir agentes con:  
 - Contexto dinámico (RAG)  
@@ -230,17 +232,21 @@ Juntos permiten construir agentes con:
 
 ---
 
-### Acción
+### Interacción
 
-**Objetivo:** interactuar con su entorno a través de herramientas.  
+⚙️ **Objetivo:** interactuar con su entorno a través de herramientas.  
 Estas **herramientas** exponen una interfaz (función, API o servicio) que se invoca para leer datos o ejecutar operaciones.
 - Encapsulan la lógica de negocio.
 - Controlan permisos y límites de seguridad.
 - Devuelven observaciones estructuradas al agente.
 
+--
+
 Algunas interfaces que se han estandarizado:
 - **MCP**: protocolo estandarizado para descubrir y usar herramientas.
 - **OpenAPI**: definición de endpoints HTTP que se exponen como acciones.
+
+--
 
 Librerias para crear herramientas:
 - **Open WebUI tools**: Herramientas integradas en OWUI. Simples y para casos sencillos.
@@ -299,7 +305,7 @@ Librerias para crear herramientas:
 
 ### Evaluación
 
-**Objetivo:** medir el resultado de las acciones y decidir si el agente debe iterar, escalar o finalizar.  
+📏 **Objetivo:** medir el resultado de las acciones y decidir si el agente debe iterar, escalar o finalizar.  
 - Verifica que los outputs cumplen criterios funcionales y de calidad.  
 - Detecta desviaciones respecto a reglas, políticas o KPIs.
 
@@ -329,6 +335,11 @@ Librerias para crear herramientas:
 
 ---
 
+### Ejecución
+▶️ Uso de herramientas para aplicar las acciones pertinentes.
+
+---
+
 ### Ejemplo
 #### Agente organizador de eventos
 - Percepcion:
@@ -342,7 +353,7 @@ Librerias para crear herramientas:
   - Analiza el tipo de evento.
   - Clasifica la audiencia de este tipo de eventos.
 
-- Acción:
+- Interacción:
   - Crea una hoja de calculo con los asistentes potenciales.
   - Prepara un dosier para el cliente con las posibles fechas y candidatos.
   - Preparar un correo en modo draft para revisarlo.
@@ -453,7 +464,7 @@ Pasos típicos:
 
 https://docs.openwebui.com/features/plugin/tools/development/
 
-Ejemplo:
+Ejemplo: http://localhost:3000/
 
 ```json
 {
