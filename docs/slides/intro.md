@@ -1,5 +1,5 @@
 ---
-title: Agentes de IA - Introducción
+title: Agente Futuro - Introducción
 theme: black
 separator: '^---$'
 verticalSeparator: '^--$'
@@ -7,7 +7,7 @@ revealOptions:
   margin: 0.04
   minScale: 0.4
   maxScale: 1.6
-  transition: slide
+  transition: slideng
   slideNumber: 'c/t'
 ---
 
