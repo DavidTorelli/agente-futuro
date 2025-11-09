@@ -27,6 +27,5 @@
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
   ],
-    "shutdownAction": "stopContainer"
-  }
-/
+  "shutdownAction": "stopCompose"
+}
