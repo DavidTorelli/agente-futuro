@@ -344,7 +344,11 @@ Librerias para crear herramientas:
 - Acción:
   - Crea una hoja de calculo con los asistentes potenciales.
   - Prepara un dosier para el cliente con las posibles fechas y candidatos.
+  - Preparar un correo en modo draft para revisarlo.
   - Envia dosier al cliente esperando confirmacion de las fechas ofrecidas.
+
+--
+
   - Envia el dosier en copia a la persona encargada de supervisar los eventos.
   - Alerta sobre cambios inesperados en la planificación.
 
@@ -379,7 +383,8 @@ Note:
 
 ---
 
-## Stack: Open WebUI + Ollama + Tools
+## Stack
+### Open WebUI + Ollama + Tools
 
 ```
 Usuario → Open WebUI (frontend)
@@ -393,14 +398,15 @@ Usuario → Open WebUI (frontend)
 
 - **Open WebUI:** interfaz moderna  
 - **Ollama:** motor local (Llama, Mistral, Gemma)  
-- **Tools:** acceso al mundo real
+- **Open WebUI / MCP Tools:** acceso a herramientas
 
 Note:
 - Mencionar devcontainer para estandarizar entorno.
 
 ---
 
-## Interacción agente–usuario–tool
+## Interacción 
+### agente–usuario–herramienta
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0a2740', 'primaryBorderColor': '#ffffff', 'primaryTextColor': '#ffffff', 'secondaryTextColor': '#ffffff', 'lineColor': '#ffffff', 'arrowheadColor': '#ffffff', 'textColor': '#ffffff' }}}%%
@@ -409,15 +415,14 @@ sequenceDiagram
     participant OW as Open WebUI<br/>Agente
     participant LLM as Ollama<br/>LLM local
     participant T as Tool<br/>buscar_doc
-    participant Obs as Observación
 
     U->>OW: Prompt inicial
     OW->>LLM: Solicita contexto y plan
     LLM-->>OW: Propuesta / llamada a tool
     OW->>T: Invoca tool con parámetros
     T-->>OW: Resultados estructurados
-    OW->>Obs: Registra observación
-    Obs-->>OW: Observación validada
+    OW->>LLM: Registra observación
+    LLM-->>OW: Observación validada
     OW-->>U: Respuesta contextual y confirmación
 ```
 
@@ -429,15 +434,8 @@ Note:
 
 ## Open WebUI vs MCP Tools
 
-| Aspecto | Open WebUI Tool | MCP Tool |
-|----------|----------------|-----------|
-| Modelo | Función local | Servicio MCP |
-| Ejecución | Dentro de WebUI | Servidor MCP externo |
-| Interoperabilidad | Local | Entre agentes y plataformas |
-| Seguridad | Local | Aislamiento por proceso/servidor |
-| Reuso | Orientado a proyecto | Orientado a ecosistema |
-
-**Idea clave:** MCP conecta agentes con herramientas de forma **segura, portable y reutilizable**.
+- Open WebUI ofrece la posibilidad de desarrollo de herramientas sencillas pero no portables.  
+- MCP es un standard que permite integrar con diferentes sistemas de forma **segura, portable y reutilizable**.  
 
 Note:
 - Cuándo usar WebUI Tools (rápido/local) vs MCP (escalable/reutilizable).
@@ -504,7 +502,7 @@ Note:
 
 ## ¡Listos para construir!
 
-👉 Próxima sesión: entorno listo + primer agente funcional.  
+👉 Próxima sesión: entorno de desarrollo listo.  
 🎯 Objetivo: agente que usa una Tool real y ejecuta una acción medible.
 
 Note:
