@@ -52,7 +52,7 @@ Cada paso incluye el enlace directo y un código QR listo para proyectar durante
 
 1. Clona el repositorio del taller:  
    ```bash
-   git clone https://github.com/DavidTorelli/agent-workshop
+   git clone https://github.com/DavidTorelli/agente-futuro.git
    cd agent-workshop
    ```
 2. Abre la carpeta en VS Code.
