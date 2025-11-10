@@ -70,9 +70,23 @@ Sus interfaces:
 ![alt text](agent-overview.png) 
 <small>Fuente: [Amit Agrahari, *Building AI Agents: A Practical Guide to the Tools & Ecosystem*](https://www.linkedin.com/pulse/building-ai-agents-practical-guide-tools-ecosystem-amit-agrahari-wdaef/).</small>
 
+---
+
+## LLM vs Asistentes vs Agentes
+
+| Concepto | Qué hace | Ejemplo |
+|-----------|-----------|----------|
+| **LLM** | Genera texto | [Llama](https://ollama.com/library/llama3), [Gemma](https://ollama.com/library/gemma3), [Mistral](https://ollama.com/library/mistral) |
+| **Asistente** | Gestiona contexto limitado | Alexa, Siri, Google Assistant |
+| **Agente** | Planifica, decide y actúa | [CrewAI](https://www.crewai.com/), [AutoGen](https://microsoft.github.io/autogen/stable/), [N8N](https://n8n.io/) |
+
 --
 
-Os imaginais que este curso lo imparte un agente?  
+Un ejemplo de asistente podria ser un programa que me ayuda a pasar las diapositivas y que me notifica cuando tengo alguna pregunta en el chat de Discord.  
+
+--
+
+Pero... os imaginais que este curso lo imparte un agente?  
 
 --
 
@@ -91,16 +105,6 @@ Vamos... que las profesoras y los profesores tienen los días contados 😂
 
 ¡Infinitamente mejor, ¿verdad?! 😜
 ![alt text](agent.png) 
-
----
-
-## LLM vs Asistentes vs Agentes
-
-| Concepto | Qué hace | Ejemplo |
-|-----------|-----------|----------|
-| **LLM** | Genera texto | [Llama](https://ollama.com/library/llama3), [Gemma](https://ollama.com/library/gemma3), [Mistral](https://ollama.com/library/mistral) |
-| **Asistente** | Gestiona contexto limitado | Alexa, Siri, Google Assistant |
-| **Agente** | Planifica, decide y actúa | [CrewAI](https://www.crewai.com/), [AutoGen](https://microsoft.github.io/autogen/stable/), [N8N](https://n8n.io/) |
 
 ---
 
