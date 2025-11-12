@@ -32,3 +32,8 @@ make test           # ejecuta tests (algunos se marcarán como skip hasta implem
 - Reglas de stock → módulo propio en `src/02_stock`
 - Fusión planned/delivered → módulo propio en `src/03_planning`
 - API → ampliar `src/04_api/main.py`
+
+## Tooling OpenAPI dentro del Dev Container
+- La imagen incluye `@redocly/openapi-cli` para validar/previsualizar specs (`openapi lint docs/openapi.yaml`, `openapi preview-docs docs/openapi.yaml --port 8080`).
+- Puedes generar clientes base con `openapi-python-client generate --path docs/openapi.yaml` para acelerar la creación de tools MCP.
+- Ejecuta `swagger-ui-watcher docs/openapi.yaml --port 8081` para navegar la documentación Swagger localmente mientras desarrollas tus herramientas.

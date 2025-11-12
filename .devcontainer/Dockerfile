@@ -20,11 +20,11 @@ RUN apt-get update && apt-get install -y \
     tesseract-ocr tesseract-ocr-eng \
     libgl1 libglib2.0-0
 
- # --- Añadir Node.js + npm + reveal-md ---
+# --- Añadir Node.js + npm + herramientas JS ---
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g npm@latest && \
-    npm install -g reveal-md
+    npm install -g reveal-md @redocly/openapi-cli swagger-ui-watcher
     
 RUN  apt-get clean && rm -rf /var/lib/apt/lists/*
 

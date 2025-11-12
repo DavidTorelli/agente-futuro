@@ -24,3 +24,5 @@ config-slides:
 tools-slides:
 	reveal-md docs/slides/tools.md --watch
 
+mcp-slides:
+	reveal-md docs/slides/mcp.md --watch

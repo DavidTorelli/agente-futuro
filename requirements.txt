@@ -2,3 +2,5 @@ crewai[tools]
 pytest
 httpx
 mcpo
+fastmcp
+openapi-python-client

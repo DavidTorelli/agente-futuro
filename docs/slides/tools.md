@@ -232,14 +232,6 @@ _logger = logging.getLogger('random_tool')
 
 ---
 
-## Troubleshooting rápido
-
-* *El modelo no llama a la Tool*: confirma que está **habilitada** en el modelo o en el chat (`+`).
-* *Parámetros mal inferidos*: añade ejemplos en el prompt o llama **explícitamente** la función.
-* *Errores HTTP en `weather_now`*: revisa red corporativa/SSL/timeout y que la ciudad exista.
-
----
-
 ## Extra
 
 * Integra tu **KB** con Tools (p. ej., buscar en KB y luego llamar a otra Tool con el resultado).

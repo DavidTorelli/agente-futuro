@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "fastmcp_random": {
+      "command": "python3",
+      "args": [
+        "src/examples/openapi_random.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/workspace/ai-solver"
+      }
+    }
+  }
+}

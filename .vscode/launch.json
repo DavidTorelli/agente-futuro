@@ -14,11 +14,33 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "Python Debugger: Current File",
+      "name": "FastMCP Random Tool",
       "type": "debugpy",
       "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal"
+      "program": "/workspaces/ai-solver/src/examples/fastmcp_random.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/workspaces/ai-solver/src"
+      }
+    },
+    {
+      "name": "MCPO Proxy (FastMCP Random)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "mcpo",
+      "args": [
+        "--port",
+        "8000",
+        "--api-key",
+        "dev-secret",
+        "--",
+        "python3",
+        "src/examples/fastmcp_random.py"
+      ],
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/workspaces/ai-solver/src"
+      }
     }
   ]
 }
