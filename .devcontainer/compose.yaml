@@ -29,21 +29,6 @@ services:
       - "3000:8080"
     restart: unless-stopped
 
-  mcpo_random:
-    image: ghcr.io/open-webui/mcpo:main
-    command:
-      - --port
-      - "8001"
-      - --config
-      - /config/mcpo-random.json
-      - --hot-reload
-    volumes:
-      - ./mcpo-random.json:/config/random.json:ro
-    networks:
-      - ai-solver
-    ports:
-      - "8010:8001"
-    restart: unless-stopped
   mcpo-weather:
     image: ghcr.io/open-webui/mcpo:main
     command:
