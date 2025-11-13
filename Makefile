@@ -26,3 +26,6 @@ tools-slides:
 
 mcp-slides:
 	reveal-md docs/slides/mcp.md --watch
+
+mcp-debug-slides:
+	reveal-md docs/slides/mcp-debug.md --watch
