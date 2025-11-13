@@ -2,10 +2,9 @@
 
 ## Guia autismo
 Descripcion: Realizar un agente que guie a las familias que tienen personas con autismo a su cargo.
-- Autismo
 * Requisitos: Definir las bases de conocimiento.
 
-- Agricultura:
+## Agricultura:
 * Base de conocimientos de cultivos por temporada.
 * Herramientas
     * Clima: Acceso a condiciones meteorologicas y alertas
